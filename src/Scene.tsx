@@ -16,19 +16,23 @@ const Scene = () => {
     })
 
     return (<>
-        <OrbitControls ref={orbitControlsRef} makeDefault minPolarAngle={Math.PI / 4} maxPolarAngle={(Math.PI / 180) * 120} />
-        <Environment background preset='sunset'>
+        <OrbitControls minDistance={3} maxDistance={20} ref={orbitControlsRef} makeDefault minPolarAngle={Math.PI / 4} maxPolarAngle={(Math.PI / 180) * 85} />
+        <Environment background >
+            <mesh scale={100}>
+                <sphereGeometry args={[1, 100, 100]} />
+                <meshBasicMaterial side={THREE.BackSide} color="#00bcdd" />
+            </mesh>
         </Environment>
         <pointLight intensity={1} position={[1, 2, 2]} castShadow />
 
         <mesh rotation={[Math.PI / 2, 0, 0]} receiveShadow position={[0, 0, -2]}>
-            <planeGeometry args={[5, 6, 1000, 1000]} />
-            <meshStandardMaterial color='#fff' side={THREE.DoubleSide} />
+            <planeGeometry args={[500, 500, 1000, 1000]} />
+            <meshStandardMaterial color='#00bcdd' side={THREE.DoubleSide} />
         </mesh>
 
         <mesh position={[0, 0.5, 0]} scale={0.5} castShadow receiveShadow>
             <sphereGeometry />
-            <meshStandardMaterial color={"#00bcdd"} />
+            <meshStandardMaterial color={"#00bcdd"} metalness={0.5} roughness={0.5} />
         </mesh>
     </>)
 }
